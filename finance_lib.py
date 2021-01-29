@@ -188,3 +188,10 @@ def norm_plot(df):
         figura.add_scatter(x = df.Date, y = df[i], name = i)
         
     figura.update_layout(title = 'Histórico do preço das ações normalizado', title_x=0.5)
+    
+def year_log_ret(df, year):
+    dic = {}
+    
+    for stock in df.columns[1:]:
+        dic[stock] = df[stock][df.Date == year + '-01-02'], df[stock][df.Date == year + '-12-30']
+    return dic    
