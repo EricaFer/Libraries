@@ -194,4 +194,17 @@ def year_log_ret(df, year):
     
     for stock in df.columns[1:]:
         dic[stock] = df[stock][df.Date == year + '-01-02'], df[stock][df.Date == year + '-12-30']
-    return dic    
+    return dic
+
+def var(df, time = 246, var = True, std = True, coef = True):
+    dic = {}
+    for col in df.columns[1:]:
+        if var is True:
+            dic['Variância' + col] = df[col].tail(time).var()
+        if std is True:
+            dic['Desvio Padrão' + col] = df[col].tail(time).std()
+        if coef is True:
+            dic['Coef de Var' + col] = df[col].tail(time).std() * 100 /df[col].tail(time).mean()
+            
+        
+        
